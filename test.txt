@@ -1,2 +1,8 @@
+<<<<<<< HEAD
 Commited by Sabin
 Commited by Subigya & Sameer
+=======
+commited by Sabin
+Commited by Sameer and Subigya
+commited by nischal
+>>>>>>> 747be690556adaa416e93eee650e3993f208e9b7
