@@ -1,0 +1,8 @@
+test/service/UserRepository$1.class
+test/controller/UserController.class
+test/service/UserRepository.class
+test/Application.class
+test/service/UserRepository$2.class
+test/domain/User.class
+test/service/UserRepository$3.class
+test/config/WebMvcConfig.class
