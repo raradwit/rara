@@ -4,11 +4,10 @@ package test.domain;
  * Created by saneel on 8/23/15.
  */
 public class User {
-
+    private int id;
     private String name;
     private int roll;
     private String alias;
-    private int id;
 
     public User() {
     }

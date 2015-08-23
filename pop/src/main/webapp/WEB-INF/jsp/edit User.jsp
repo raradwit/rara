@@ -23,7 +23,7 @@
 
         <tr>
         <td>
-            <input type="hidden" value="${user.id}">
+            <input type="hidden" name="id" value="${user.id}">
         </td>
         <td><input type="submit" value="Update"/>
 

@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Repository
 public class UserRepository {
+
     @Autowired
     protected JdbcTemplate jdbc;
 
@@ -27,13 +28,6 @@ public class UserRepository {
             }
         },id);
     }
-
-    private static final RowMapper<User> userMapper = new RowMapper<User>() {
-        public User mapRow(ResultSet rs,int rowNum) throws SQLException {
-            User user = new User(rs.getInt("id"),rs.getInt("roll"),rs.getString("name"),rs.getString("alias"));
-            return user;
-        }
-    };
 
     public void insert(User user) {
         jdbc.update("insert into user(name,roll,alias) values (?,?,?)",user.getName(),user.getRoll(),user.getAlias());
@@ -51,11 +45,20 @@ public class UserRepository {
     }
 
     public User edit(int id) {
-        return jdbc.queryForObject("select * from user where id=?",userMapper,id);
+        return jdbc.queryForObject("select * from user where id=?",new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                User user = new User(resultSet.getInt("id"),resultSet.getInt("roll"),resultSet.getString("name"),resultSet.getString("alias"));
+                return user;
+            }
+        },id);
     }
 
     public void update(User user) {
-        int roll= user.getRoll();
-//        jdbc.update("update user set name=?,roll=?,alias=? where id =? ",user.getName(),user.getRoll(),user.getAlias(),u.getId());
+        jdbc.update("update user set name=?,roll=?,alias=? where id =? ",user.getName(),user.getRoll(),user.getAlias(),user.getId());
+    }
+
+    public void delete(int id) {
+        jdbc.update("delete from user where id = ?",id);
     }
 }

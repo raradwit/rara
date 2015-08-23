@@ -24,7 +24,7 @@
                 ${i.roll}
                 ${i.alias}
                 <a href="/edit?id=${i.id}">Edit</a>
-                <a href="/">Delete</a>
+                <a href="/delete?id=${i.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>
