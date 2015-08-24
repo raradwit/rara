@@ -3,33 +3,57 @@
 <html>
 <head>
     <title>Show User</title>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
 </head>
 
 <body>
+<div class="container">
 
-<table style="border: 1px solid red">
-    <tr>
-        <th>S.N</th>
-        <th>Name</th>
-        <th>Roll No</th>
-        <th>Nick Name</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <c:forEach var ="i" items ="${user}" varStatus="counter">
-        <tr>
-            <td>
-                ${counter.count})
-                ${i.name}
-                ${i.roll}
-                ${i.alias}
-                <a href="/edit?id=${i.id}">Edit</a>
-                <a href="/delete?id=${i.id}">Delete</a>
-            </td>
-        </tr>
-    </c:forEach>
+    <div class="table-responsive">
 
-</table>
+        <h2>Show Users</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Roll</th>
+                <th>Nick Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <c:forEach var ="i" items ="${user}" varStatus="counter">
+                <tr>
+                    <td>
+                            ${counter.count}
+                    </td>
+                    <td>
+                            ${i.name}
+                    </td>
+                    <td>
+                            ${i.roll}
+                    </td>
+                    <td>
+                            ${i.alias}
+                    </td>
+                    <td>
+                        <a href="/edit?id=${i.id}">Edit</a>
+                    </td>
+                    <td>
+                        <a href="/delete?id=${i.id}">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 
 </body>
 
