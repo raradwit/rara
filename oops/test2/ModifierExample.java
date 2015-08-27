@@ -27,7 +27,7 @@ public class ModifierExample{
 	public static void main(String args[]){
 		ModifierExample mod = new ModifierExample(3,4);
 
-		mod.num1 = 8;
+		mod.num1 = 9;
 
 		System.out.println(mod.num1);
 

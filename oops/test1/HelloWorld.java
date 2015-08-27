@@ -31,7 +31,7 @@ class HelloWorld
 		test();
 		TestClass tc = new TestClass();
 		tc.test();
-		TestClass tc1 = new TestClass("bbc","223");
+		TestClass tc1 = new TestClass("bbc","224");
 		System.out.printf("tc object name = %s, tc object rollNo=%s, tc1 object name = %s, tc1 object rollNo = %s",tc.name,tc.rollNo, tc1.name,tc1.rollNo);
 		int a = hw.add(4,5);
 
