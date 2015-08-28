@@ -27,8 +27,7 @@ public class UserController {
     * */
 
     @RequestMapping(value="/",method= RequestMethod.GET)
-    public String adduser(Model model) {
-        model.addAttribute("greeting",new User());
+    public String adduser() {
         return "Add User";
     }
 
