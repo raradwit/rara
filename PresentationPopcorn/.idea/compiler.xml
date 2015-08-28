@@ -22,8 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="PresentationPopcorn" />
+        <module name="com.rara" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="com.rara" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>
