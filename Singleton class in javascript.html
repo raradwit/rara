@@ -1,0 +1,56 @@
+<html>
+	<head>
+	
+	</head>
+	<body>
+		<script>
+			function solution(input) {
+			
+				
+			
+				if(false === (this instanceof solution)) {
+					return new solution(input);
+				}
+				
+				
+				
+				
+				this.sortedInput = function(){
+					return (input.split(",").sort());
+				}	
+
+				this.test = function(){
+					alert("hello");
+				}
+			}
+			
+			
+			
+			var FooStatic = (function() {
+						var barPrivate = function() {
+							alert('FooStatic.barPrivate() called.');
+						};
+						return {
+							bar: function () {
+							   barPrivate();
+							}
+						}
+					})();
+			
+			
+			var test = FooStatic;
+			test.bar();
+			
+			
+			
+			
+			
+			var s = solution("1,3,2,5,7,4,9");
+			var sortedInput = s.sortedInput();
+
+			console.log(sortedInput);
+			s.test();
+
+		</script>
+	</body>
+</html>
