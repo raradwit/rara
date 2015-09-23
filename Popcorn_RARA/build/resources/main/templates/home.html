@@ -1,11 +1,22 @@
-<html>
-	<head>
-		<title>Spring Security Example</title>
-	</head>
-	
-	<body>
-		<h1>Welcome</h1>
-		
-		<p>Click <a href="@{/hello}">here</a> to see a greeting</p>
-	</body>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head lang="en">
+	<meta charset="UTF-8"/>
+	<title>Popcorn</title>
+</head>
+<body>
+<form th:action="@{/logout}" method="post">
+	<input type="submit" value="Sign Out"/>
+</form>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]  [[${#httpServletRequest.userPrincipal}]]!</h1>
+<p>I am anil</p>
+<form th:action="@{/logout}" method="post">
+	<input type="submit" value="Sign Out"/>
+</form>
+<p>
+Index page
+</p>
+</body>
 </html>

@@ -1,33 +1,77 @@
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-	<head>
-		<title>Spring Security Example</title>
-	</head>
-	
-	<body>
-		<div th:if="${param.error}">
-			Invalid username and password
-		</div>
-		
-		<div th:if="${param.logout}">
-			You have been logged out.
-		</div>
-		
-		<form th:action="@{/login}" method="post">
-			<div>
-				<label>
-					User Name: <input type="text" name="username"></input>
-				</label>
-			</div>
-			
-			<div>
-				<label>
-					Password: <input  type="password" name="password"></input>
-				</label>
-			</div>
-			
-			<div><input type="submit" value="login"></input></div>
+		>
+<head>
+	<title>Popcorn</title>
+	<script th:src="@{/js/angular.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<!--<body>
+<div id="logo"><img th:src="@{/images/popcorn.jpg}"/> </div>
+<div th:if="${param.error}">
+	Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+	You have been logged out.
+</div>
+<form th:action="@{/login}" method="post">
+	<div><label> User Name : <input type="text" name="username"/> </label></div>
+	<div><label> Password: <input type="password" name="password"/> </label></div>
+	<div><input type="submit" value="Sign In"/></div>
+</form>-->
+
+
+<body ng-app="myApp">
+<div id="nav-bar">
+	<div id="logo"><img th:src="@{/images/popcorn.jpg}"/> </div>
+	<div id="name">PopCorn System</div>
+</div>
+<div ng-controller="firstController">
+	<div>
+		<a href="#" ng-click="toggle1()" class="button" id="regiser-login">Register User</a>
+		<a href="#" ng-click="toggle2()" class="button" id="ticket-login">Ticket Login</a>
+	</div>
+	<!--  <div id="toggle">  -->
+	<div  ng-show="registeredLogin" class="login-card">
+		<h1>Log-in</h1><br/>
+		<form>
+			<input type="text" name="username" placeholder="email"/>
+			<input type="password" name="password" placeholder="Password"/>
+			<input type="submit" name="login" class="login-submit" value="login"/>
 		</form>
-	</body>
+
+		<div class="login-help">
+			<a href="#">Register</a> • <a href="#">Forgot Password</a>
+		</div>
+	</div>
+
+	<div  ng-show="ticketLogin" class="ticket">
+		<h1>Ticket-Id</h1><br/>
+		<form>
+			<input type="text" name="ticket" placeholder="Ticket Id"/>
+			<input type="submit" name="login" class="login login-submit" value="login"/>
+		</form>
+	</div>
+</div>
+
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('firstController', function($scope) {
+		$scope.ticketLogin = false;
+		$scope.registeredLogin = false;
+		$scope.myVar = false;
+		$scope.toggle1 = function() {
+			//$scope.myVar = !$scope.myVar;
+			$scope.registeredLogin = true;
+			$scope.ticketLogin = false;
+		};
+		$scope.toggle2 = function() {
+			//$scope.myVar = !$scope.myVar;
+			$scope.ticketLogin = true;
+			$scope.registeredLogin = false;
+		};
+	});
+</script>
+<!--</body>-->
+</body>
 </html>
