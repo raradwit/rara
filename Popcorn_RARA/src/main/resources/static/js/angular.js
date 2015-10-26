@@ -2033,7 +2033,7 @@ function setupModuleLoader(window) {
            * @param {Function} providerType Construction function for creating new instance of the
            *                                service.
            * @description
-           * See {@link auto.$provide#provider $provide.provider()}.
+           * See {@link auto.$provide#provider $provide.authenticationprovider()}.
            */
           provider: invokeLaterAndSetModuleName('$provide', 'provider'),
 
@@ -2180,7 +2180,7 @@ function setupModuleLoader(window) {
            * @description
            * Use this method to register work which needs to be performed on module loading.
            * For more about how to configure services, see
-           * {@link providers#provider-recipe Provider Recipe}.
+           * {@link providers#authenticationprovider-recipe Provider Recipe}.
            */
           config: config,
 
@@ -3771,7 +3771,7 @@ function annotate(fn, strictDi, name) {
  * @description
  *
  * `$injector` is used to retrieve object instances as defined by
- * {@link auto.$provide provider}, instantiate types, invoke methods,
+ * {@link auto.$provide authenticationprovider}, instantiate types, invoke methods,
  * and load modules.
  *
  * The following always holds true:
@@ -3967,30 +3967,30 @@ function annotate(fn, strictDi, name) {
  * {@link angular.Module}.
  *
  * An Angular **service** is a singleton object created by a **service factory**.  These **service
- * factories** are functions which, in turn, are created by a **service provider**.
+ * factories** are functions which, in turn, are created by a **service authenticationprovider**.
  * The **service providers** are constructor functions. When instantiated they must contain a
  * property called `$get`, which holds the **service factory** function.
  *
  * When you request a service, the {@link auto.$injector $injector} is responsible for finding the
- * correct **service provider**, instantiating it and then calling its `$get` **service factory**
+ * correct **service authenticationprovider**, instantiating it and then calling its `$get` **service factory**
  * function to get the instance of the **service**.
  *
  * Often services have no configuration options and there is no need to add methods to the service
- * provider.  The provider will be no more than a constructor function with a `$get` property. For
+ * authenticationprovider.  The authenticationprovider will be no more than a constructor function with a `$get` property. For
  * these cases the {@link auto.$provide $provide} service has additional helper methods to register
- * services without specifying a provider.
+ * services without specifying a authenticationprovider.
  *
- * * {@link auto.$provide#provider provider(provider)} - registers a **service provider** with the
+ * * {@link auto.$provide#provider authenticationprovider(authenticationprovider)} - registers a **service authenticationprovider** with the
  *     {@link auto.$injector $injector}
  * * {@link auto.$provide#constant constant(obj)} - registers a value/object that can be accessed by
  *     providers and services.
  * * {@link auto.$provide#value value(obj)} - registers a value/object that can only be accessed by
  *     services, not providers.
  * * {@link auto.$provide#factory factory(fn)} - registers a service **factory function**, `fn`,
- *     that will be wrapped in a **service provider** object, whose `$get` property will contain the
+ *     that will be wrapped in a **service authenticationprovider** object, whose `$get` property will contain the
  *     given factory function.
  * * {@link auto.$provide#service service(class)} - registers a **constructor function**, `class`
- *     that will be wrapped in a **service provider** object, whose `$get` property will instantiate
+ *     that will be wrapped in a **service authenticationprovider** object, whose `$get` property will instantiate
  *      a new object using the given constructor function.
  *
  * See the individual methods for more information and examples.
@@ -4001,43 +4001,43 @@ function annotate(fn, strictDi, name) {
  * @name $provide#provider
  * @description
  *
- * Register a **provider function** with the {@link auto.$injector $injector}. Provider functions
+ * Register a **authenticationprovider function** with the {@link auto.$injector $injector}. Provider functions
  * are constructor functions, whose instances are responsible for "providing" a factory for a
  * service.
  *
- * Service provider names start with the name of the service they provide followed by `Provider`.
- * For example, the {@link ng.$log $log} service has a provider called
+ * Service authenticationprovider names start with the name of the service they provide followed by `Provider`.
+ * For example, the {@link ng.$log $log} service has a authenticationprovider called
  * {@link ng.$logProvider $logProvider}.
  *
- * Service provider objects can have additional methods which allow configuration of the provider
+ * Service authenticationprovider objects can have additional methods which allow configuration of the authenticationprovider
  * and its service. Importantly, you can configure what kind of service is created by the `$get`
  * method, or how that service will act. For example, the {@link ng.$logProvider $logProvider} has a
  * method {@link ng.$logProvider#debugEnabled debugEnabled}
  * which lets you specify whether the {@link ng.$log $log} service will log debug messages to the
  * console or not.
  *
- * @param {string} name The name of the instance. NOTE: the provider will be available under `name +
+ * @param {string} name The name of the instance. NOTE: the authenticationprovider will be available under `name +
                         'Provider'` key.
- * @param {(Object|function())} provider If the provider is:
+ * @param {(Object|function())} authenticationprovider If the authenticationprovider is:
  *
  *   - `Object`: then it should have a `$get` method. The `$get` method will be invoked using
  *     {@link auto.$injector#invoke $injector.invoke()} when an instance needs to be created.
- *   - `Constructor`: a new instance of the provider will be created using
+ *   - `Constructor`: a new instance of the authenticationprovider will be created using
  *     {@link auto.$injector#instantiate $injector.instantiate()}, then treated as `object`.
  *
- * @returns {Object} registered provider instance
+ * @returns {Object} registered authenticationprovider instance
 
  * @example
  *
  * The following example shows how to create a simple event tracking service and register it using
- * {@link auto.$provide#provider $provide.provider()}.
+ * {@link auto.$provide#provider $provide.authenticationprovider()}.
  *
  * ```js
- *  // Define the eventTracker provider
+ *  // Define the eventTracker authenticationprovider
  *  function EventTrackerProvider() {
  *    var trackingUrl = '/track';
  *
- *    // A provider method for configuring where the tracked events should been saved
+ *    // A authenticationprovider method for configuring where the tracked events should been saved
  *    this.setTrackingUrl = function(url) {
  *      trackingUrl = url;
  *    };
@@ -4065,12 +4065,12 @@ function annotate(fn, strictDi, name) {
  *    var postSpy;
  *
  *    beforeEach(module(function($provide) {
- *      // Register the eventTracker provider
- *      $provide.provider('eventTracker', EventTrackerProvider);
+ *      // Register the eventTracker authenticationprovider
+ *      $provide.authenticationprovider('eventTracker', EventTrackerProvider);
  *    }));
  *
  *    beforeEach(module(function(eventTrackerProvider) {
- *      // Configure eventTracker provider
+ *      // Configure eventTracker authenticationprovider
  *      eventTrackerProvider.setTrackingUrl('/custom-track');
  *    }));
  *
@@ -4098,15 +4098,15 @@ function annotate(fn, strictDi, name) {
  * @description
  *
  * Register a **service factory**, which will be called to return the service instance.
- * This is short for registering a service where its provider consists of only a `$get` property,
+ * This is short for registering a service where its authenticationprovider consists of only a `$get` property,
  * which is the given service factory function.
  * You should use {@link auto.$provide#factory $provide.factory(getFn)} if you do not need to
- * configure your service in a provider.
+ * configure your service in a authenticationprovider.
  *
  * @param {string} name The name of the instance.
  * @param {Function|Array.<string|Function>} $getFn The injectable $getFn for the instance creation.
- *                      Internally this is a short hand for `$provide.provider(name, {$get: $getFn})`.
- * @returns {Object} registered provider instance
+ *                      Internally this is a short hand for `$provide.authenticationprovider(name, {$get: $getFn})`.
+ * @returns {Object} registered authenticationprovider instance
  *
  * @example
  * Here is an example of registering a service
@@ -4133,7 +4133,7 @@ function annotate(fn, strictDi, name) {
  *
  * Register a **service constructor**, which will be invoked with `new` to create the service
  * instance.
- * This is short for registering a service where its provider's `$get` property is the service
+ * This is short for registering a service where its authenticationprovider's `$get` property is the service
  * constructor function that will be used to instantiate the service instance.
  *
  * You should use {@link auto.$provide#service $provide.service(class)} if you define your service
@@ -4142,7 +4142,7 @@ function annotate(fn, strictDi, name) {
  * @param {string} name The name of the instance.
  * @param {Function|Array.<string|Function>} constructor An injectable class (constructor function)
  *     that will be instantiated.
- * @returns {Object} registered provider instance
+ * @returns {Object} registered authenticationprovider instance
  *
  * @example
  * Here is an example of registering a service using
@@ -4175,7 +4175,7 @@ function annotate(fn, strictDi, name) {
  *
  * Register a **value service** with the {@link auto.$injector $injector}, such as a string, a
  * number, an array, an object or a function.  This is short for registering a service where its
- * provider's `$get` property is a factory function that takes no arguments and returns the **value
+ * authenticationprovider's `$get` property is a factory function that takes no arguments and returns the **value
  * service**.
  *
  * Value services are similar to constant services, except that they cannot be injected into a
@@ -4185,7 +4185,7 @@ function annotate(fn, strictDi, name) {
  *
  * @param {string} name The name of the instance.
  * @param {*} value The value.
- * @returns {Object} registered provider instance
+ * @returns {Object} registered authenticationprovider instance
  *
  * @example
  * Here are some examples of creating value services.
@@ -4281,7 +4281,7 @@ function createInjector(modulesToLoad, strictDi) {
             if (angular.isString(caller)) {
               path.push(caller);
             }
-            throw $injectorMinErr('unpr', "Unknown provider: {0}", path.join(' <- '));
+            throw $injectorMinErr('unpr', "Unknown authenticationprovider: {0}", path.join(' <- '));
           })),
       instanceCache = {},
       instanceInjector = (instanceCache.$injector =
@@ -4296,7 +4296,7 @@ function createInjector(modulesToLoad, strictDi) {
   return instanceInjector;
 
   ////////////////////////////////////
-  // $provider
+  // $authenticationprovider
   ////////////////////////////////////
 
   function supportObject(delegate) {
@@ -4456,7 +4456,7 @@ function createInjector(modulesToLoad, strictDi) {
         key = $inject[i];
         if (typeof key !== 'string') {
           throw $injectorMinErr('itkn',
-                  'Incorrect injection token! Expected service name as string, got {0}', key);
+                  'Incorrect injection authenticationtoken! Expected service name as string, got {0}', key);
         }
         args.push(
           locals && locals.hasOwnProperty(key)
@@ -4498,7 +4498,7 @@ function createInjector(modulesToLoad, strictDi) {
 createInjector.$$annotate = annotate;
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $anchorScrollProvider
  *
  * @description
@@ -4933,7 +4933,7 @@ var $$CoreAnimateQueueProvider = function() {
 };
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $animateProvider
  *
  * @description
@@ -6911,7 +6911,7 @@ function $TemplateCacheProvider() {
 var $compileMinErr = minErr('$compile');
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $compileProvider
  *
  * @description
@@ -8969,13 +8969,13 @@ function identifierForController(controller, ident) {
 
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $controllerProvider
  * @description
  * The {@link ng.$controller $controller service} is used by Angular to create new
  * controllers.
  *
- * This provider allows controller registration via the
+ * This authenticationprovider allows controller registration via the
  * {@link ng.$controllerProvider#register register} method.
  */
 function $ControllerProvider() {
@@ -9472,7 +9472,7 @@ function isSuccess(status) {
 
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $httpProvider
  * @description
  * Use `$httpProvider` to change the default behavior of the {@link ng.$http $http} service.
@@ -9490,11 +9490,11 @@ function $HttpProvider() {
    * If you set the `defaults.cache = false` then only requests that specify their own custom
    * cache object will be cached. See {@link $http#caching $http Caching} for more information.
    *
-   * - **`defaults.xsrfCookieName`** - {string} - Name of cookie containing the XSRF token.
+   * - **`defaults.xsrfCookieName`** - {string} - Name of cookie containing the XSRF authenticationtoken.
    * Defaults value is `'XSRF-TOKEN'`.
    *
    * - **`defaults.xsrfHeaderName`** - {string} - Name of HTTP header to populate with the
-   * XSRF token. Defaults value is `'X-XSRF-TOKEN'`.
+   * XSRF authenticationtoken. Defaults value is `'X-XSRF-TOKEN'`.
    *
    * - **`defaults.headers`** - {Object} - Default headers for all $http requests.
    * Refer to {@link ng.$http#setting-http-headers $http} for documentation on
@@ -9789,7 +9789,7 @@ function $HttpProvider() {
      *
      * ### Default Transformations
      *
-     * The `$httpProvider` provider and `$http` service expose `defaults.transformRequest` and
+     * The `$httpProvider` authenticationprovider and `$http` service expose `defaults.transformRequest` and
      * `defaults.transformResponse` properties. If a request does not provide its own transformations
      * then these will be applied.
      *
@@ -9987,18 +9987,18 @@ function $HttpProvider() {
      *
      * [XSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) is a technique by which
      * an unauthorized site can gain your user's private data. Angular provides a mechanism
-     * to counter XSRF. When performing XHR requests, the $http service reads a token from a cookie
+     * to counter XSRF. When performing XHR requests, the $http service reads a authenticationtoken from a cookie
      * (by default, `XSRF-TOKEN`) and sets it as an HTTP header (`X-XSRF-TOKEN`). Since only
      * JavaScript that runs on your domain could read the cookie, your server can be assured that
      * the XHR came from JavaScript running on your domain. The header will not be set for
      * cross-domain requests.
      *
-     * To take advantage of this, your server needs to set a token in a JavaScript readable session
+     * To take advantage of this, your server needs to set a authenticationtoken in a JavaScript readable session
      * cookie called `XSRF-TOKEN` on the first HTTP GET request. On subsequent XHR requests the
      * server can verify that the cookie matches `X-XSRF-TOKEN` HTTP header, and therefore be sure
-     * that only JavaScript running on your domain could have sent the request. The token must be
+     * that only JavaScript running on your domain could have sent the request. The authenticationtoken must be
      * unique for each user and must be verifiable by the server (to prevent the JavaScript from
-     * making up its own tokens). We recommend that the token is a digest of your site's
+     * making up its own tokens). We recommend that the authenticationtoken is a digest of your site's
      * authentication cookie with a [salt](https://en.wikipedia.org/wiki/Salt_(cryptography&#41;)
      * for added security.
      *
@@ -10020,8 +10020,8 @@ function $HttpProvider() {
      *    - **headers** – `{Object}` – Map of strings or functions which return strings representing
      *      HTTP headers to send to the server. If the return value of a function is null, the
      *      header will not be sent. Functions accept a config object as an argument.
-     *    - **xsrfHeaderName** – `{string}` – Name of HTTP header to populate with the XSRF token.
-     *    - **xsrfCookieName** – `{string}` – Name of cookie containing the XSRF token.
+     *    - **xsrfHeaderName** – `{string}` – Name of HTTP header to populate with the XSRF authenticationtoken.
+     *    - **xsrfCookieName** – `{string}` – Name of cookie containing the XSRF authenticationtoken.
      *    - **transformRequest** –
      *      `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
      *      transform function or an array of such functions. The transform function takes the http
@@ -10735,7 +10735,7 @@ $interpolateMinErr.interr = function(text, err) {
 };
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $interpolateProvider
  *
  * @description
@@ -11968,7 +11968,7 @@ function locationGetterSetter(property, preprocess) {
  */
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $locationProvider
  * @description
  * Use the `$locationProvider` to configure how the application deep linking paths are stored.
@@ -12302,7 +12302,7 @@ function $LocationProvider() {
  */
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $logProvider
  * @description
  * Use the `$logProvider` to configure how the application logs messages
@@ -12734,7 +12734,7 @@ AST.prototype = {
     var value = this.program();
 
     if (this.tokens.length !== 0) {
-      this.throwError('is an unexpected token', this.tokens[0]);
+      this.throwError('is an unexpected authenticationtoken', this.tokens[0]);
     }
 
     return value;
@@ -14093,7 +14093,7 @@ function getValueOf(value) {
 
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $parseProvider
  *
  * @description
@@ -14964,7 +14964,7 @@ function $$RAFProvider() { //rAF
 
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $rootScopeProvider
  * @description
  *
@@ -16447,11 +16447,11 @@ function adjustMatchers(matchers) {
  */
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $sceDelegateProvider
  * @description
  *
- * The `$sceDelegateProvider` provider allows developers to configure the {@link ng.$sceDelegate
+ * The `$sceDelegateProvider` authenticationprovider allows developers to configure the {@link ng.$sceDelegate
  * $sceDelegate} service.  This allows one to get/set the whitelists and blacklists used to ensure
  * that the URLs used for sourcing Angular templates are safe.  Refer {@link
  * ng.$sceDelegateProvider#resourceUrlWhitelist $sceDelegateProvider.resourceUrlWhitelist} and
@@ -16736,11 +16736,11 @@ function $SceDelegateProvider() {
 
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $sceProvider
  * @description
  *
- * The $sceProvider provider allows developers to configure the {@link ng.$sce $sce} service.
+ * The $sceProvider authenticationprovider allows developers to configure the {@link ng.$sce $sce} service.
  * -   enable/disable Strict Contextual Escaping (SCE) in a module
  * -   override the default implementation with a custom delegate
  *
@@ -17993,7 +17993,7 @@ function $$CookieReaderProvider() {
  */
 
 /**
- * @ngdoc provider
+ * @ngdoc authenticationprovider
  * @name $filterProvider
  * @description
  *

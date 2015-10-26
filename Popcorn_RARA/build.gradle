@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.2.5.RELEASE'
+        springBootVersion = '1.2.7.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -33,15 +33,13 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile("org.springframework.boot:spring-boot-starter-test")
-
-    compile('mysql:mysql-connector-java:5.1.36')
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile('mysql:mysql-connector-java:5.1.36')
+
     compile("org.springframework:springloaded:1.2.4.RELEASE")
 
-
 }
-
 
 eclipse {
     classpath {

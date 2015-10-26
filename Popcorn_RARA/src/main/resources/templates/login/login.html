@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  >
+<head>
+	<title>Popcorn</title>
+	<script th:src="@{/js/angular.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/custom.css}"/>
+</head>
+
+<body ng-app="myApp">
+<div class="wrapper">
+	<div class="row">
+		<div class="container col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+			<div class="title">
+				Login
+			</div>
+			<div class="error" th:if="${param.error}">
+				Invalid username and password/ticket time expired
+			</div>
+
+			<div th:if="${param.logout}">
+				You have been logged out.
+			</div>
+			<div ng-controller="firstController">
+				<div  ng-show="member">
+					<input type="checkbox" name="member" value="registered" ng-click="toggle()" id="regiser-login"/>
+					<label>Member</label>
+				</div>
+				<div  ng-show="nonMember">
+					<input type="checkbox" name="nonMember" value="registered" ng-click="toggle1()" id="ticket-login"/>
+					<label>Not a Member</label>
+				</div>
+				<div ng-show="registeredLogin">
+					<div th:include="login/_memberLogin :: regLogin"></div>
+				</div>
+				<div ng-show="ticketLogin">
+					<div th:include="login/_ticketLogin :: tiktLogin"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('firstController', function($scope) {
+		$scope.member = true;
+		$scope.nonMember = false;
+		$scope.registeredLogin = false;
+		$scope.ticketLogin = true;
+		$scope.toggle = function() {
+			//$scope.myVar = !$scope.myVar;
+			$scope.ticketLogin = false;
+			$scope.registeredLogin = true;
+			$scope.member = false;
+			$scope.nonMember = true;
+		};
+		$scope.toggle1 = function() {
+			//$scope.myVar = !$scope.myVar;
+			$scope.ticketLogin = true;
+			$scope.registeredLogin = false;
+			$scope.member = true;
+			$scope.nonMember = false;
+		};
+	});
+</script>
+
+</body>
+</html>
