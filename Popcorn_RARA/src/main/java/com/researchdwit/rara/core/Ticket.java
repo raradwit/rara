@@ -15,11 +15,14 @@ public class Ticket implements TicketDetails {
     private String ticketNumber;
     private String movieStartTime;
     private String movieEndTime;
+    private boolean ticketExpired;
+
     private final Set<GrantedAuthority> authorities;
 
-    public Ticket(String ticketNumber,Collection<? extends GrantedAuthority> authorities) {
+    public Ticket(String ticketNumber,Collection<? extends GrantedAuthority> authorities,Boolean ticketExpired) {
         this.ticketNumber = ticketNumber;
         this.authorities= Collections.unmodifiableSet(sortAuthorities(authorities));
+        this.ticketExpired=ticketExpired;
 
     }
 
@@ -39,7 +42,7 @@ public class Ticket implements TicketDetails {
         this.movieEndTime = movieEndTime;
     }
 
-    private boolean ticketExpired;
+
 
     public void setTicketNumber(String ticketNumber) {
         this.ticketNumber = ticketNumber;

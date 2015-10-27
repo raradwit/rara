@@ -25,13 +25,14 @@ public class TicketService implements TicketDetailsService {
     public TicketDetails loadTicketByTicketNumber(String ticketNumber) throws TicketNumberNotFoundException {
         TicketInfo ticketInfo = ticketDao.getTicketInfo(ticketNumber);
         GrantedAuthority authority = new SimpleGrantedAuthority(ticketInfo.getRole());
-        TicketDetails ticketDetails = new Ticket(ticketNumber, Arrays.asList(authority));
+        TicketDetails ticketDetails = new Ticket(ticketNumber, Arrays.asList(authority),ticketInfo.isTicketExpired());
 
-        System.out.println("==============Ticket info received=================");
+        System.out.println("\n\n==============Ticket info received=================");
         System.out.println("ticket number: "+ticketInfo.getTicketNumber());
         System.out.println("ticket time: "+ticketInfo.getTicketTime());
         System.out.println("ticket role: "+ticketInfo.getRole());
-        System.out.println("==============Ticket info complete=================");
+        System.out.println("ticket expired: "+ticketInfo.isTicketExpired());
+        System.out.println("==============Ticket info complete=================\n\n");
 
         return ticketDetails;
     }

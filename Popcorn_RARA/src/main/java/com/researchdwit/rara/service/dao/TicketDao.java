@@ -40,14 +40,16 @@ public class TicketDao {
                 String endTime = rs.getString("end_time").toString();
                 String currentTime = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
 
+                System.out.println("\n\n============Movie time information===========");
                 System.out.println("starttime: "+startTime);
                 System.out.println("endtime: "+endTime);
                 System.out.println("currenttime: "+currentTime);
+                System.out.println("============Movie time information complete===========\n\n");
 
                 try {
 
                     boolean result = isTimeBetweenTwoTime(startTime,endTime,currentTime);
-                    System.out.println("result : "+result);
+                    System.out.println("istimebetweenstartandendtime : "+result);
                     if(result){
                         ticket.setTicketExpired(false);
                     }else {
@@ -89,7 +91,6 @@ public class TicketDao {
             Calendar endCalendar = Calendar.getInstance();
             endCalendar.setTime(endTime);
 
-            //
             if (currentTime.compareTo(endTime) < 0) {
 
                 currentCalendar.add(Calendar.DATE, 1);
@@ -103,10 +104,9 @@ public class TicketDao {
                 startTime = startCalendar.getTime();
 
             }
-            //
             if (currentTime.before(startTime)) {
 
-                System.out.println(" Time is Lesser ");
+                System.out.println("RESULT, Time is Lesser ");
 
                 valid = false;
             } else {
@@ -116,10 +116,6 @@ public class TicketDao {
                     endTime = endCalendar.getTime();
 
                 }
-
-                System.out.println("Comparing , Start Time /n " + startTime);
-                System.out.println("Comparing , End Time /n " + endTime);
-                System.out.println("Comparing , Current Time /n " + currentTime);
 
                 if (currentTime.before(endTime)) {
                     System.out.println("RESULT, Time lies b/w");

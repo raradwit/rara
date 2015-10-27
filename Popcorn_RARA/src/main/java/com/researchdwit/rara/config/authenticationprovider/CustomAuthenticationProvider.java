@@ -44,12 +44,18 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
             Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
             auth = new UsernamePasswordAuthenticationToken(user,authentication.getCredentials().toString().trim(),authorities);
-            System.out.println("userauth is: "+auth);
+            System.out.println("\n\n===========UsernamePasswordAuthenticationToken=========");
+            System.out.println(auth);
+            System.out.println("===========UsernamePasswordAuthenticationToken complete=========\n\n");
 
         }else if(ticketNumber!=null) {
             try {
                 TicketDetails ticket = ticketService.loadTicketByTicketNumber(ticketNumber);
+                System.out.println("\n\n==========CustomAuthProvider=========");
                 System.out.println("ticket authority: "+ticket.getAuthorities());
+                System.out.println("ticket number: "+ticket.getTicketNumber());
+                System.out.println("ticket expired: "+ticket.isTicketExpired());
+                System.out.println("==========CustomAuthProvider complete=========\n\n");
                 if(ticket.isTicketExpired()) {
                     throw  new BadCredentialsException("Ticket expired");
                 }else {
@@ -59,8 +65,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             } catch (TicketNumberNotFoundException e) {
                 e.printStackTrace();
             }
+            System.out.println("\n\n=========TicketNumberAuthenticationToken==========");
+            System.out.println(auth);
+            System.out.println("=========TicketNumberAuthenticationToken complete==========\n\n");
 
-            System.out.println("Ticket auth is: "+auth);
 
         }
 
