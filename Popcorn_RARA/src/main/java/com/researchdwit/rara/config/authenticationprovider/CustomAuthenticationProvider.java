@@ -31,6 +31,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException,ClassCastException {
         String userName = authentication.getName().trim();
+
         String ticketNumber = ((CustomWebAuthenticationDetails)authentication.getDetails()).getTicketNumber();
 
         Authentication auth = null;
@@ -40,6 +41,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
             if(user == null) {
                 throw  new BadCredentialsException("Username not found");
+            }
+
+            if(!authentication.getCredentials().equals(user.getPassword())){
+                throw  new BadCredentialsException("Incorrect password");
             }
 
             Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
